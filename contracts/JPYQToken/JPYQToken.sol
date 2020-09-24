@@ -12,18 +12,24 @@ contract JPYQToken is StandardToken, TrueBurnableToken, DetailedERC20, TruePausa
     uint8 constant DECIMALS = 18;
 
     constructor(address _firstOwner,
-                address _secondOwner) DetailedERC20("JPYQ Stablecoin by Q DAO v1.0", "JPYQ", DECIMALS)  public {
+                address _secondOwner,
+                address _thirdOwner,
+                address _governance) DetailedERC20("JPYQ Stablecoin by Q DAO v1.0", "JPYQ", DECIMALS)  public {
 
         owners.push(_firstOwner);
         owners.push(_secondOwner);
-        owners.push(msg.sender);
+        owners.push(_thirdOwner);
 
         ownersIndices[_firstOwner] = 1;
         ownersIndices[_secondOwner] = 2;
-        ownersIndices[msg.sender] = 3;
+        ownersIndices[_thirdOwner] = 3;
 
         howManyOwnersDecide = 2;
-        governanceContracts[msg.sender] = true;
+        governanceContracts[_governance] = true;
+    }
+
+    function getOwner() external view returns (address) {
+        return owners[0];
     }
 
 
