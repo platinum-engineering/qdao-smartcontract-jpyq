@@ -30,3 +30,5 @@ build/
 # Except this file
 !.gitkeep
 process.env
+
+.prettierignore
